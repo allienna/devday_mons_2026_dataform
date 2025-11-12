@@ -6,21 +6,12 @@ config {
     clusterBy: ["creation_date", "user_tenure"]
   },
   columns: {
-    user_id: {
-      description: "Unique identifier for the user",
-      bigqueryPolicyTags: []
-    },
+    user_id: "Unique identifier for the user",
     age: "Age of the user",
     creation_date: "Timestamp when the user account was created",
     user_tenure: "Number of years since account creation",
     badge_count: "Total number of badges earned",
-    questions_and_answer_count: "Total number of posts (questions + answers)",
-    question_count: "Total number of questions posted",
-    answer_count: "Total number of answers posted",
-    last_badge_received_at: "Timestamp of most recent badge",
-    last_posted_at: "Timestamp of most recent post",
-    last_question_posted_at: "Timestamp of most recent question",
-    last_answer_posted_at: "Timestamp of most recent answer"
+    last_badge_received_at: "Timestamp of most recent badge"
   },
   assertions: {
     uniqueKey: ["user_id"],
@@ -29,21 +20,17 @@ config {
 }
 
 -- Gold Layer (Marts): Business-ready analytical tables
--- Aggregated user engagement metrics for analytics and reporting
+-- Step 04: Demonstrates data quality testing with assertions
 
-js {
-  // Import macros for use in this model
-  const { count_posts_if, last_posted_post } = require("../../includes/macros");
-}
+-- Step 04: Testing and data quality with assertions
+-- Built-in tests via config: uniqueKey and nonNull
+-- Custom assertion for business logic validation
 
 with users as (
     select * from ${ref("stg_users")}
 ),
 badges as (
     SELECT * FROM ${ref("stg_badges")}
-),
-posts_all AS (
-    SELECT * FROM ${ref("fct_posts")}
 )
 
 SELECT
@@ -52,20 +39,10 @@ SELECT
     users.creation_date,
     users.user_tenure,
     COUNT(DISTINCT badges.badge_id) AS badge_count,
-    COUNT(DISTINCT posts_all.post_id) AS questions_and_answer_count,
-
-    ${count_posts_if('question')} AS question_count,
-    ${count_posts_if('answer')} AS answer_count,
-
-    MAX(badges.award_timestamp) AS last_badge_received_at,
-    MAX(posts_all.created_at) AS last_posted_at,
-
-    ${last_posted_post("question")} AS last_question_posted_at,
-    ${last_posted_post("answer")} AS last_answer_posted_at
+    MAX(badges.award_timestamp) AS last_badge_received_at
 
 FROM
     users
     LEFT JOIN badges ON users.user_id = badges.user_id
-    LEFT JOIN posts_all ON users.user_id = posts_all.owner_user_id
 GROUP BY
     1, 2, 3, 4
