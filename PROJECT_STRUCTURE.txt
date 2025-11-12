@@ -1,0 +1,21 @@
+.
+├── dataform.json
+├── definitions
+│   ├── assertions
+│   │   └── assert_dim_users_stats_badge_count_is_valid.sqlx
+│   ├── marts
+│   │   └── core
+│   ├── sources
+│   │   └── stackoverflow.js
+│   └── staging
+│       └── stackoverflow
+├── DEMO_GUIDE.md
+├── includes
+│   └── macros.js
+├── package-lock.json
+├── package.json
+├── PROJECT_STRUCTURE.txt
+├── README.md
+└── SETUP.md
+
+9 directories, 10 files
