@@ -1,6 +1,7 @@
 config {
   type: "table",
   schema: "aal_demo_devday_2026",
+  tags: ["marts", "dim"],
   description: "Gold Layer: User engagement dimension table with aggregated statistics",
   bigquery: {
     clusterBy: ["creation_date", "user_tenure"]

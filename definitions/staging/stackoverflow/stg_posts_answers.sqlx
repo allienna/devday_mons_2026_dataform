@@ -1,6 +1,7 @@
 config {
   type: "view",
   schema: "aal_demo_devday_2026",
+  tags: ["staging"],
   description: "Silver Layer: Cleaned and standardized answers from StackOverflow"
 }
 
