@@ -1,7 +1,7 @@
 config {
   type: "view",
   schema: "aal_demo_devday_2026",
-  tags: ["staging"],
+  tags: ["silver"],
   description: "Silver Layer: Cleaned and standardized badge data from StackOverflow"
 }
 

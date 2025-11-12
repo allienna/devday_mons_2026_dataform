@@ -1,7 +1,7 @@
 config {
   type: "table",
   schema: "aal_demo_devday_2026",
-  tags: ["marts", "fct"],
+  tags: ["gold", "fct"],
   description: "Gold Layer: Unified fact table combining questions and answers with partitioning for performance",
   bigquery: {
     partitionBy: "DATE(created_at)",
