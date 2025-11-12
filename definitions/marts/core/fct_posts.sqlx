@@ -20,11 +20,6 @@ config {
 -- Gold Layer (Marts): Business-ready analytical tables
 -- Combines related entities, applies business logic, optimized for queries
 
-js {
-  // Import macros for use in this model
-  const { count_posts_if, last_posted_post } = require("../../includes/macros");
-}
-
 with posts_answers as (
     select * from ${ref("stg_posts_answers")}
 ),
