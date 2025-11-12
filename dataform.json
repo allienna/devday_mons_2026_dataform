@@ -1,0 +1,8 @@
+{
+  "defaultProject": "your-gcp-project-id",
+  "defaultDataset": "aal_demo_devday_2026",
+  "defaultLocation": "europe-west1",
+  "assertionSchema": "dataform_assertions",
+  "warehouse": "bigquery",
+  "defaultDatabase": "your-gcp-project-id"
+}

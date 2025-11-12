@@ -1,0 +1,6 @@
+node_modules/
+.dataform/
+compiled.json
+.env
+*.log
+.DS_Store

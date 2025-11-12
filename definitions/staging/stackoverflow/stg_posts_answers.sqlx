@@ -1,0 +1,20 @@
+config {
+  type: "view",
+  schema: "aal_demo_devday_2026",
+  description: "Silver Layer: Cleaned and standardized answers from StackOverflow"
+}
+
+-- Silver Layer (Staging): Light transformations and standardization
+
+SELECT
+    id AS post_id,
+    creation_date AS created_at,
+    'answer' AS type,
+    NULL AS title,
+    body,
+    owner_user_id,
+    parent_id
+FROM
+    ${ref("bigquery-public-data", "stackoverflow", "posts_answers")}
+WHERE
+    creation_date > '2008-01-01'

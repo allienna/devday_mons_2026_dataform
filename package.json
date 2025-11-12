@@ -1,0 +1,13 @@
+{
+  "name": "devday-mons-2026-dataform",
+  "version": "1.0.0",
+  "description": "Dataform project for DevDay Mons 2026 - Illustrating Lakehouse architecture with Medallion pattern",
+  "main": "index.js",
+  "scripts": {
+    "compile": "dataform compile",
+    "test": "dataform test"
+  },
+  "dependencies": {
+    "@dataform/core": "^3.0.0"
+  }
+}
