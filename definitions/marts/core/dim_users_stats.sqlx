@@ -32,8 +32,14 @@ config {
 -- Aggregated user engagement metrics for analytics and reporting
 
 js {
-  // Import macros for use in this model
-  const { count_posts_if, last_posted_post } = require("../../includes/macros");
+  // Define macros inline for this model
+  function count_posts_if(type) {
+    return `COUNT(DISTINCT IF(posts_all.type = "${type}", posts_all.post_id, NULL))`;
+  }
+
+  function last_posted_post(type) {
+    return `MAX(IF(posts_all.type = "${type}", posts_all.created_at, NULL))`;
+  }
 }
 
 with users as (
