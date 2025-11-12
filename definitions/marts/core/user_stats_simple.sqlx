@@ -1,0 +1,23 @@
+config {
+  type: "view",
+  schema: "aal_demo_devday_2026",
+  description: "Simple first query combining users and badges data"
+}
+
+-- Step 01: First simple request
+-- Direct query from Bronze layer sources without modularization
+
+SELECT
+    users.id AS user_id,
+    users.age,
+    users.creation_date,
+    ROUND(TIMESTAMP_DIFF(CURRENT_TIMESTAMP(), users.creation_date, day)/365) AS user_tenure,
+    COUNT(DISTINCT badges.id) AS badge_count
+FROM
+    ${ref("bigquery-public-data", "stackoverflow", "users")} AS users
+    LEFT JOIN ${ref("bigquery-public-data", "stackoverflow", "badges")} AS badges
+        ON users.id = badges.user_id
+WHERE
+    users.creation_date > '2008-01-01'
+GROUP BY
+    1, 2, 3, 4
